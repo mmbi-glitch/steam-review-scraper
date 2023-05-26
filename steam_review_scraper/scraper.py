@@ -209,7 +209,7 @@ def get_game_review(id, language='default'):
         title = [review.find('div', {'class': 'title'}).text for review in reviews]
         hour = [float(review.find('div', {'class': 'hours'}).text.split(' ')[0].replace(",", "")) if review.find('div', {'class': 'hours'}) 
                 else np.nan for review in reviews]
-        helpful = [review.find('div',{'class': 'found_helpful'}).get_text(strip=True).split(' ')[0] for review in reviews]
+        helpful = [review.find('div',{'class': 'found_helpful'}).get_text(strip=True).split(' ')[0].replace(",","") for review in reviews]
         helpful = [0 if num == 'No' else int(num) for num in helpful]
         comment_section = [review.find('div', {'class': 'apphub_CardTextContent'}) for review in reviews]
         raw_post_date = [x.find('div',{'class':'date_posted'}).get_text(strip=True) for x in comment_section]
